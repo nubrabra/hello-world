@@ -1,10 +1,19 @@
 import Head from "next/head";
 import { get, toString } from "lodash";
 import { useState, useEffect } from "react";
+import { getCookie } from "cookies-next";
 
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
+  console.log("main_cookie ::::", getCookie("main_cookie"));
+
+  const [mainCookie, setMainCookie] = useState("");
+
+  useEffect(() => {
+    setMainCookie(getCookie("main_cookie"));
+  }, [getCookie("main_cookie")]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,13 +21,17 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main style={{ paddingTop: 30, paddingBottom: 30 }}>
         <h1 className={styles.title}>{"Test Iframe get cookies."}</h1>
 
         <p
           className={styles.description}
-          style={{ color: "blue" }}
+          style={{ color: "blue", marginTop: 5, marginBottom: 5 }}
         >{`:: ${process.env["NEXT_PUBLIC_IFRAME_URL"]} ::`}</p>
+
+        <p
+          style={{ marginTop: 5, marginBottom: 10 }}
+        >{`my cookie is [main_cookie] : ${mainCookie}`}</p>
 
         <div style={{ width: "100%", minHeight: 500 }}>
           <iframe
@@ -28,6 +41,10 @@ const Home = () => {
             width={"100%"}
           ></iframe>
         </div>
+
+        {/* <h1 style={{ fontSize: 24 }}>{`Your cookie is = ${getCookie(
+          "test"
+        )}`}</h1> */}
       </main>
 
       <style jsx>{`
