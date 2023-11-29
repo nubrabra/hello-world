@@ -15,7 +15,7 @@ const Home = () => {
   }, [getCookie("main_cookie")]);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="mainContainer">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -35,6 +35,7 @@ const Home = () => {
 
         <div style={{ width: "100%", minHeight: 500 }}>
           <iframe
+            id="iframeId"
             src={process.env["NEXT_PUBLIC_IFRAME_URL"]}
             title={"description"}
             height={"500px"}
